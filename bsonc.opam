@@ -1,0 +1,26 @@
+opam-version: "2.0"
+name: "OCaml-bsonc"
+version: "0.1.0"
+maintainer: "Cédric Le Moigne <cedlemo@gmx.com>"
+authors: "Cédric Le Moigne <cedlemo@gmx.com>"
+homepage: "https://github.com/cedlemo/OCaml-bsonc"
+bug-reports: "https://github.com/cedlemo/OCaml-bsonc/issues"
+license: "GPL3"
+dev-repo: "git+https://github.com/cedlemo/OCaml-bsonc.git"
+synopsis: "OCaml bindings for the libbson C library (http://mongoc.org/libbson/current/)"
+description: "This library provides bindings based on Ctypes the libbison API (see http://mongoc.org/libbson/current/api.html)"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+depends: [
+  "ocaml"
+  "dune" {>= "1.2"}
+  "ctypes"
+  "ctypes-foreign"
+  "alcotest"
+  "base"
+  "stdio"
+  "configurator"
+  "conf-pkg-config" {build}
+]

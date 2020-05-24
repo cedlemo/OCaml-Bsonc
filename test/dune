@@ -1,0 +1,14 @@
+(test
+  (name test)
+  (libraries Bsonc alcotest ctypes ctypes.foreign stdio)
+)
+;(executables
+; (names test)
+; (libraries Bsonc alcotest ctypes ctypes.foreign stdio)
+; (action  (run %{test} -e))
+;)
+;
+;(alias
+;  (name    runtest)
+;  (deps    (:x test.exe))
+;  (action  (run %{x})))
