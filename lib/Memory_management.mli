@@ -16,8 +16,4 @@
  * along with OCaml-bsonc.  If not, see <http://www.gnu.org/licenses/>.
  *)
 
-open Ctypes
-open Foreign
-
-let bson_free_char =
-  foreign "bson_free" (ptr char @-> returning void)
+val bson_free_char: unit ptr -> unit
