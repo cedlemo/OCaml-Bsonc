@@ -19,6 +19,7 @@ depends: [
   "ctypes"
   "ctypes-foreign"
   "alcotest"
+  "memcpy"
   "base"
   "stdio"
   "configurator"

@@ -18,6 +18,7 @@
 
 open Ctypes
 open Foreign
+open Memory_management
 
 type t = unit ptr
 let t : t typ = ptr void
@@ -36,9 +37,20 @@ let append_int32 document key value =
   in raw document key (String.length key) value
 
 let as_canonical_extended_json document =
-  let raw = foreign "bson_as_canonical_extended_json" (t @-> ptr_opt void @-> returning string)
-  in raw document None
+  let raw =
+    foreign "bson_as_canonical_extended_json" (t @-> ptr_opt void @-> returning (ptr char))
+  in
+  let ptr = raw document None in
+  let res = Utils.char_ptr_to_string ptr in
+  let () = bson_free_char ptr in
+  res
+
 
 let as_relaxed_extended_json document =
-  let raw = foreign "bson_as_relaxed_extended_json" (t @-> ptr_opt void @-> returning string)
-  in raw document None
+  let raw =
+    foreign "bson_as_relaxed_extended_json" (t @-> ptr_opt void @-> returning (ptr char))
+  in
+  let ptr = raw document None in
+  let res = Utils.char_ptr_to_string ptr in
+  let () = bson_free_char ptr in
+  res
