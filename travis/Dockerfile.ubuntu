@@ -1,0 +1,20 @@
+FROM ocaml/opam2:ubuntu
+
+RUN \
+  sudo apt update && \
+  sudo DEBIAN_FRONTEND=noninteractive apt install -y \
+    libmongoc-1.0-0 \
+    libmongoc-dev \
+    m4 \
+    pkg-config \
+    libffi6 \
+    libffi-dev
+
+COPY . /home/opam/tests
+RUN sudo chown -R opam:opam /home/opam/tests
+WORKDIR /home/opam/tests
+RUN opam switch $OCAML_VERSION
+RUN eval $(opam env)
+RUN ./travis/initialize_ocaml_environment.sh
+RUN ./travis/show_versions.sh
+CMD bash -ex ./travis/runtest.sh

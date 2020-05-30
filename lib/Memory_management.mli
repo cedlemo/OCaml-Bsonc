@@ -16,4 +16,5 @@
  * along with OCaml-bsonc.  If not, see <http://www.gnu.org/licenses/>.
  *)
 
-val bson_free_char: unit ptr -> unit
+open Ctypes
+val bson_free_char: char ptr -> unit

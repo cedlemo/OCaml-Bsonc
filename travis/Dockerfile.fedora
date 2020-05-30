@@ -1,0 +1,19 @@
+FROM ocaml/opam2:fedora
+
+RUN \
+    sudo dnf install -y \
+    mongo-c-driver \
+    mongo-c-driver-devel \
+    mongo-c-driver-libs \
+    pkg-config \
+    m4 \
+    libffi-devel
+
+COPY . /home/opam/tests
+RUN sudo chown -R opam:opam /home/opam/tests
+WORKDIR /home/opam/tests
+RUN opam switch $OCAML_VERSION
+RUN eval $(opam env)
+RUN ./travis/initialize_ocaml_environment.sh
+RUN ./travis/show_versions.sh
+CMD bash -ex ./travis/runtest.sh

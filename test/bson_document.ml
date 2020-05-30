@@ -20,6 +20,8 @@ let test_as_relaxed_extended_json () =
 
 let tests = [
   test_case "append_int32" `Quick test_append_int32;
+  (*
   test_case "as_canonical_extended_json" `Quick test_as_canonical_extended_json;
   test_case "as_relaxed_extended_json" `Quick test_as_relaxed_extended_json;
+  *)
 ]
