@@ -16,8 +16,6 @@
  * along with OCaml-bsonc.  If not, see <http://www.gnu.org/licenses/>.
  *)
 
-open Ctypes
-
 (** BSON Document Abstraction *)
 
 (** The Bson.t type represents a BSON document. *)

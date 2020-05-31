@@ -23,5 +23,6 @@ depends: [
   "base"
   "stdio"
   "configurator"
+  "re"
   "conf-pkg-config" {build}
 ]

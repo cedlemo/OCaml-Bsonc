@@ -1,6 +1,6 @@
 (test
   (name test)
-  (libraries Bsonc alcotest ctypes ctypes.foreign stdio)
+  (libraries Bsonc alcotest ctypes ctypes.foreign stdio re)
 )
 ;(executables
 ; (names test)
