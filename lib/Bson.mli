@@ -60,3 +60,9 @@ val as_canonical_extended_json:
  * Encodes bson as an UTF-8 string in the relaxed MongoDB Extended JSON format. *)
 val as_relaxed_extended_json:
   t -> string
+
+(**
+ * http://mongoc.org/libbson/current/bson_as_json.html
+ * Encodes bson as an UTF-8 string using libbson's legacy JSON format. *)
+val as_json:
+  t -> string

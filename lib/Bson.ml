@@ -40,20 +40,23 @@ let append_bool document key value =
   let raw = foreign "bson_append_bool" (t @-> string @-> int @-> bool @-> returning bool)
   in raw document key (String.length key) value
 
-let as_canonical_extended_json document =
-  let raw =
-    foreign "bson_as_canonical_extended_json" (t @-> ptr_opt void @-> returning (ptr char))
+let transform_to_json fn_name document =
+let raw =
+    foreign fn_name (t @-> ptr int @-> returning (ptr char))
   in
-  let ptr = raw document None in
-  let res = Utils.char_ptr_to_string ptr in
+  let len_ptr = allocate int 0 in
+  let ptr = raw document len_ptr in
+  let len = !@ len_ptr in
+  let res = Utils.char_ptr_to_string ptr len in
   let () = bson_free_char ptr in
   res
 
+let as_canonical_extended_json document =
+  transform_to_json "bson_as_canonical_extended_json" document
+
 let as_relaxed_extended_json document =
-  let raw =
-    foreign "bson_as_relaxed_extended_json" (t @-> ptr_opt void @-> returning (ptr char))
-  in
-  let ptr = raw document None in
-  let res = Utils.char_ptr_to_string ptr in
-  let () = bson_free_char ptr in
-  res
+  transform_to_json "bson_as_relaxed_extended_json" document
+
+let as_json document =
+  transform_to_json "bson_as_json" document
+

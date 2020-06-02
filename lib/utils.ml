@@ -19,9 +19,17 @@ let string_to_char_ptr str =
   let () = unsafe_memcpy ocaml_bytes pointer ~src ~dst ~len ~src_off ~dst_off in
   dst
 
-let char_ptr_to_string src =
+(** Transform a char ptr to an OCaml string. This is for C string*)
+let char_ptr_to_c_string src =
   let open Memcpy in
   let len = c_strlen src in
+  let dst = Bytes.make len '\000' in
+  let () = unsafe_memcpy pointer ocaml_bytes ~src ~dst ~len ~src_off ~dst_off in
+  Bytes.to_string dst
+
+(** Transform a char ptr to an OCaml string. This is for string with a specific length*)
+let char_ptr_to_string src len =
+  let open Memcpy in
   let dst = Bytes.make len '\000' in
   let () = unsafe_memcpy pointer ocaml_bytes ~src ~dst ~len ~src_off ~dst_off in
   Bytes.to_string dst
