@@ -36,6 +36,10 @@ let append_int32 document key value =
   let raw = foreign "bson_append_int32" (t @-> string @-> int @-> int @-> returning bool)
   in raw document key (String.length key) value
 
+let append_bool document key value =
+  let raw = foreign "bson_append_bool" (t @-> string @-> int @-> bool @-> returning bool)
+  in raw document key (String.length key) value
+
 let as_canonical_extended_json document =
   let raw =
     foreign "bson_as_canonical_extended_json" (t @-> ptr_opt void @-> returning (ptr char))
@@ -44,7 +48,6 @@ let as_canonical_extended_json document =
   let res = Utils.char_ptr_to_string ptr in
   let () = bson_free_char ptr in
   res
-
 
 let as_relaxed_extended_json document =
   let raw =

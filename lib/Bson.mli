@@ -36,6 +36,13 @@ val create:
 val append_int32:
   t -> string -> int -> bool
 
+(** http://mongoc.org/libbson/current/bson_append_bool.html
+ * The append_bool function shall append a new element to the bson
+ * document
+ * *)
+val append_bool:
+  t -> string -> bool -> bool
+
 (**
  * Bsonc provides routines for converting to and from the JSON format. In particular,
  * it supports the MongoDB extended JSON format.
