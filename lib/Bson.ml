@@ -40,6 +40,18 @@ let append_bool document key value =
   let raw = foreign "bson_append_bool" (t @-> string @-> int @-> bool @-> returning bool)
   in raw document key (String.length key) value
 
+exception Args_error of string
+
+let append_code document key value =
+  let raw = foreign "bson_append_code" (t @-> string @-> int @-> ptr char @-> returning bool)
+  in (* The OCaml string must be a NULL terminated C string with a length < to INT32_MAX *)
+  let len = String.length value in
+  if len >= max_int then raise (Args_error "code length is greater than INT32_MAX")
+  else (
+    let c_str = Utils.string_to_char_ptr value in
+    raw document key (String.length key) c_str
+  )
+
 let transform_to_json fn_name document =
 let raw =
     foreign fn_name (t @-> ptr int @-> returning (ptr_opt char))

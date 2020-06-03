@@ -43,6 +43,16 @@ val append_int32:
 val append_bool:
   t -> string -> bool -> bool
 
+exception Args_error of string
+
+(** http://http://mongoc.org/libbson/current/bson_append_code.html
+ * The bson_append_code() function shall append a new element to bson using the UTF-8
+ * encoded javascript provided.
+ * If the string length is greater than INT32_MAX, this function throws
+ *)
+val append_code:
+  t -> string -> string -> bool
+
 (**
  * Bsonc provides routines for converting to and from the JSON format. In particular,
  * it supports the MongoDB extended JSON format.

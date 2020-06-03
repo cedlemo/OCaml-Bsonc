@@ -11,6 +11,11 @@ let test_append_bool () =
   let res = Bson.append_bool document "foo" false in
   Alcotest.(check bool) "append ok" true res
 
+let test_append_code () =
+  let document = Bson.create () in
+  let res = Bson.append_code document "SetXtoY" "x = y" in
+  Alcotest.(check bool) "append ok" true res
+
 let test_as_canonical_extended_json () =
   let document = Bson.create () in
   let _res = Bson.append_int32 document "foo" 1 in
@@ -35,6 +40,7 @@ let test_as_json () =
 let tests = [
   test_case "append_int32" `Quick test_append_int32;
   test_case "append_bool" `Quick test_append_bool;
+  test_case "append_code" `Quick test_append_code;
   test_case "as_json" `Quick test_as_json;
   (*
   test_case "as_canonical_extended_json" `Quick test_as_canonical_extended_json;
