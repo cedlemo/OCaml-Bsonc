@@ -42,14 +42,15 @@ let append_bool document key value =
 
 let transform_to_json fn_name document =
 let raw =
-    foreign fn_name (t @-> ptr int @-> returning (ptr char))
+    foreign fn_name (t @-> ptr int @-> returning (ptr_opt char))
   in
   let len_ptr = allocate int 0 in
-  let ptr = raw document len_ptr in
-  let len = !@ len_ptr in
+  match raw document len_ptr with
+  | None -> None
+  | Some ptr -> let len = !@ len_ptr in
   let res = Utils.char_ptr_to_string ptr len in
   let () = bson_free_char ptr in
-  res
+  Some res
 
 let as_canonical_extended_json document =
   transform_to_json "bson_as_canonical_extended_json" document
