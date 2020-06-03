@@ -26,7 +26,7 @@ let test_as_relaxed_extended_json () =
 let test_as_json () =
   let document = Bson.create () in
   let _res = Bson.append_bool document "foo" false in
-  let data = Bson.as_relaxed_extended_json document in
+  let data = Bson.as_json document in
   Alcotest.(check string) "same string" "{ \"foo\" : false }" data
 
 let tests = [
