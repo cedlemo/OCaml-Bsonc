@@ -52,6 +52,20 @@ let append_code document key value =
     raw document key (String.length key) c_str
   )
 
+let append_code_with_scope document key value scope =
+  let raw = foreign "bson_append_code_with_scope" (t @-> string @-> int @-> ptr char @-> ptr_opt void @-> returning bool)
+  in (* The OCaml string must be a NULL terminated C string with a length < to INT32_MAX *)
+  let len = String.length value in
+  if len >= max_int then raise (Args_error "code length is greater than INT32_MAX")
+  else (
+    let c_str = Utils.string_to_char_ptr value in
+    let scope = match scope with
+    | None -> None
+    | Some scope' -> Some (coerce (t) (ptr void) scope')
+    in
+    raw document key (String.length key) c_str scope
+  )
+
 let transform_to_json fn_name document =
 let raw =
     foreign fn_name (t @-> ptr int @-> returning (ptr_opt char))

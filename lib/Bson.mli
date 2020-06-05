@@ -46,12 +46,22 @@ val append_bool:
 exception Args_error of string
 
 (** http://http://mongoc.org/libbson/current/bson_append_code.html
- * The bson_append_code() function shall append a new element to bson using the UTF-8
+ * The append_code function shall append a new element to bson using the UTF-8
  * encoded javascript provided.
  * If the string length is greater than INT32_MAX, this function throws
  *)
 val append_code:
   t -> string -> string -> bool
+
+(** http://http://mongoc.org/libbson/current/bson_append_code_with_scope.html
+ * The append_code_with_scope function shall perform like append_code except it
+ * allows providing a scope to the javascript function in the form of a bson document.
+ * If scope is NULL, this function appends an element with BSON type “code”,
+ * otherwise with BSON type “code with scope”.
+ * If the string length is greater than INT32_MAX, this function throws
+ *)
+val append_code_with_scope:
+  t -> string -> string -> t option -> bool
 
 (**
  * Bsonc provides routines for converting to and from the JSON format. In particular,
