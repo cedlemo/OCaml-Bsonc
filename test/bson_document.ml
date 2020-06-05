@@ -15,7 +15,7 @@ let test_as_json () =
 
 let test_append_int32 () =
   let document = Bson.create () in
-  let res = Bson.append_int32 document "foo" 1 in
+  let res = Bson.append_int32 document "foo" 1l in
   Alcotest.(check bool) "append ok" true res
 
 let test_append_code () =
@@ -50,14 +50,14 @@ let test_append_code_with_scope_without_scope () =
 
 let test_as_canonical_extended_json () =
   let document = Bson.create () in
-  let _res = Bson.append_int32 document "foo" 1 in
+  let _res = Bson.append_int32 document "foo" 1l in
   match Bson.as_canonical_extended_json document with
   | None -> Alcotest.fail "json expected"
   | Some data -> Alcotest.(check string) "same string" "{ \"foo\" : { \"$numberInt\" : \"1\" } }" data
 
 let test_as_relaxed_extended_json () =
   let document = Bson.create () in
-  let _res = Bson.append_int32 document "foo" 1 in
+  let _res = Bson.append_int32 document "foo" 1l in
   match Bson.as_relaxed_extended_json document with
   | None -> Alcotest.fail "json expected"
   | Some data -> Alcotest.(check string) "same string" "{ \"foo\" : 1 }" data

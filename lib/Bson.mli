@@ -34,7 +34,7 @@ val create:
  * document
  * *)
 val append_int32:
-  t -> string -> int -> bool
+  t -> string -> int32 -> bool
 
 (** http://mongoc.org/libbson/current/bson_append_bool.html
  * The append_bool function shall append a new element to the bson
@@ -86,3 +86,71 @@ val as_relaxed_extended_json:
  * Encodes bson as an UTF-8 string using libbson's legacy JSON format. *)
 val as_json:
   t -> string option
+
+(*
+
+bson_t
+
+    bson_append_array()
+    bson_append_array_begin()
+    bson_append_array_end()
+    bson_append_binary()
+OK  bson_append_bool()
+OK  bson_append_code()
+OK  bson_append_code_with_scope()
+    bson_append_date_time()
+    bson_append_dbpointer()
+    bson_append_decimal128()
+    bson_append_document()
+    bson_append_document_begin()
+    bson_append_document_end()
+    bson_append_double()
+OK  bson_append_int32()
+    bson_append_int64()
+    bson_append_iter()
+    bson_append_maxkey()
+    bson_append_minkey()
+    bson_append_now_utc()
+    bson_append_null()
+    bson_append_oid()
+    bson_append_regex()
+    bson_append_regex_w_len()
+    bson_append_symbol()
+    bson_append_time_t()
+    bson_append_timestamp()
+    bson_append_timeval()
+    bson_append_undefined()
+    bson_append_utf8()
+    bson_append_value()
+    bson_array_as_json()
+    bson_as_canonical_extended_json()
+    bson_as_json()
+    bson_as_relaxed_extended_json()
+    bson_compare()
+    bson_concat()
+    bson_copy()
+    bson_copy_to()
+    bson_copy_to_excluding()
+    bson_copy_to_excluding_noinit()
+    bson_copy_to_excluding_noinit_va()
+    bson_count_keys()
+    bson_destroy()
+    bson_destroy_with_steal()
+    bson_equal()
+    bson_get_data()
+    bson_has_field()
+    bson_init()
+    bson_init_from_json()
+    bson_init_static()
+    bson_new()
+    bson_new_from_buffer()
+    bson_new_from_data()
+    bson_new_from_json()
+    bson_reinit()
+    bson_reserve_buffer()
+    bson_sized_new()
+    bson_steal()
+    bson_validate()
+    bson_validate_with_error()
+
+*)

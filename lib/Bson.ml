@@ -33,7 +33,7 @@ let create () =
   document
 
 let append_int32 document key value =
-  let raw = foreign "bson_append_int32" (t @-> string @-> int @-> int @-> returning bool)
+  let raw = foreign "bson_append_int32" (t @-> string @-> int @-> int32_t @-> returning bool)
   in raw document key (String.length key) value
 
 let append_bool document key value =
