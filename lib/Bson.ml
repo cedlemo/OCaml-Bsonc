@@ -40,6 +40,10 @@ let append_int64 document key value =
   let raw = foreign "bson_append_int64" (t @-> string @-> int @-> int64_t @-> returning bool)
   in raw document key (String.length key) value
 
+let append_null document key =
+  let raw = foreign "bson_append_null" (t @-> string @-> int @-> returning bool)
+  in raw document key (String.length key)
+
 let append_bool document key value =
   let raw = foreign "bson_append_bool" (t @-> string @-> int @-> bool @-> returning bool)
   in raw document key (String.length key) value

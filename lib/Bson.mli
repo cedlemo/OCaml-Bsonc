@@ -37,11 +37,18 @@ val append_int32:
   t -> string -> int32 -> bool
 
 (** http://mongoc.org/libbson/current/bson_append_int64.html
- * The append_int32 function shall append a new element to the bson
+ * The append_int64 function shall append a new element to the bson
  * document
  * *)
 val append_int64:
   t -> string -> int64 -> bool
+
+(** http://mongoc.org/libbson/current/bson_append_null.html
+ * The append_null function shall append a new element to the bson
+ * document
+ * *)
+val append_null:
+  t -> string -> bool
 
 (** http://mongoc.org/libbson/current/bson_append_bool.html
  * The append_bool function shall append a new element to the bson
@@ -113,12 +120,12 @@ OK  bson_append_code_with_scope()
     bson_append_document_end()
     bson_append_double()
 OK  bson_append_int32()
-    bson_append_int64()
+OK  bson_append_int64()
     bson_append_iter()
     bson_append_maxkey()
     bson_append_minkey()
     bson_append_now_utc()
-    bson_append_null()
+OK  bson_append_null()
     bson_append_oid()
     bson_append_regex()
     bson_append_regex_w_len()
