@@ -36,6 +36,13 @@ val create:
 val append_int32:
   t -> string -> int32 -> bool
 
+(** http://mongoc.org/libbson/current/bson_append_int64.html
+ * The append_int32 function shall append a new element to the bson
+ * document
+ * *)
+val append_int64:
+  t -> string -> int64 -> bool
+
 (** http://mongoc.org/libbson/current/bson_append_bool.html
  * The append_bool function shall append a new element to the bson
  * document

@@ -18,6 +18,15 @@ let test_append_int32 () =
   let res = Bson.append_int32 document "foo" 1l in
   Alcotest.(check bool) "append ok" true res
 
+let test_append_int64 () =
+  let document = Bson.create () in
+  let res = Bson.append_int64 document "foo" 1L in
+  let () = Alcotest.(check bool) "append ok" true res in
+  match Bson.as_json document with
+  | None -> Alcotest.fail "json expected"
+  | Some json ->
+    Alcotest.(check string)  "same code" "{ \"foo\" : 1 }" json
+
 let test_append_code () =
   let document = Bson.create () in
   let res = Bson.append_code document "SetXtoY" "x = y" in
@@ -66,6 +75,7 @@ let tests = [
   test_case "append_bool" `Quick test_append_bool;
   test_case "as_json" `Quick test_as_json;
   test_case "append_int32" `Quick test_append_int32;
+  test_case "append_int64" `Quick test_append_int64;
   test_case "append_code" `Quick test_append_code;
   test_case "append_code_with_scope_with_scope" `Quick test_append_code_with_scope_with_scope;
   test_case "append_code_with_scope_without_scope" `Quick test_append_code_with_scope_without_scope;
