@@ -58,6 +58,15 @@ val append_bool:
   t -> string -> bool -> bool
 
 (** http://mongoc.org/libbson/current/bson_append_date_time.html.html
+ * The append_date_time function function shall append a new element to
+ * a bson document containing a date and time with no timezone information.
+ * The value is assumed to be in UTC format of milliseconds since the UNIX
+ * epoch. and MAY be negative.
+ * *)
+val append_date_time:
+  t -> string -> int64 -> bool
+
+(** http://mongoc.org/libbson/current/bson_append_utf8.html.html
  * The append_bool function shall append a new element to the bson
  * document
  * *)
@@ -120,7 +129,7 @@ OK  bson_append_bool()
 OK  bson_append_code()
 OK  bson_append_code_with_scope()
 OK  bson_append_date_time()
-    bson_append_dbpointer()
+DEP bson_append_dbpointer() PRECATED
     bson_append_decimal128()
     bson_append_document()
     bson_append_document_begin()
@@ -140,8 +149,8 @@ OK  bson_append_null()
     bson_append_time_t()
     bson_append_timestamp()
     bson_append_timeval()
-    bson_append_undefined()
-    bson_append_utf8()
+DEP bson_append_undefined() PRECATED
+OK  bson_append_utf8()
     bson_append_value()
     bson_array_as_json()
     bson_as_canonical_extended_json()
