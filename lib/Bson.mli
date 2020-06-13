@@ -70,8 +70,8 @@ val append_date_time:
  * The append_bool function shall append a new element to the bson
  * document
  * *)
-val append_date_time:
-  t -> string -> int64 -> bool
+val append_utf8:
+  t -> string -> string -> bool
 
 exception Args_error of string
 
