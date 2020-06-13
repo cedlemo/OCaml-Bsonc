@@ -66,6 +66,15 @@ let test_append_code_with_scope_without_scope () =
   | Some json ->
     Alcotest.(check string)  "same code" "{ \"SetXtoY\" : { \"$code\" : \"x = y\" } }" json
 
+let test_append_date_time () =
+  let document = Bson.create () in
+  let res = Bson.append_date_time document "foo" 1L in
+  let () = Alcotest.(check bool) "append ok" true res in
+  match Bson.as_json document with
+  | None -> Alcotest.fail "json expected"
+  | Some json ->
+    Alcotest.(check string)  "same code" "{ \"foo\" : { \"$date\" : 1 } }" json
+
 let test_as_canonical_extended_json () =
   let document = Bson.create () in
   let _res = Bson.append_int32 document "foo" 1l in
@@ -89,6 +98,7 @@ let tests = [
   test_case "append_code" `Quick test_append_code;
   test_case "append_code_with_scope_with_scope" `Quick test_append_code_with_scope_with_scope;
   test_case "append_code_with_scope_without_scope" `Quick test_append_code_with_scope_without_scope;
+  test_case "append_date_time" `Quick test_append_date_time;
   (*
   test_case "as_canonical_extended_json" `Quick test_as_canonical_extended_json;
   test_case "as_relaxed_extended_json" `Quick test_as_relaxed_extended_json;

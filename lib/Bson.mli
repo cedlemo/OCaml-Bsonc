@@ -57,6 +57,13 @@ val append_null:
 val append_bool:
   t -> string -> bool -> bool
 
+(** http://mongoc.org/libbson/current/bson_append_date_time.html.html
+ * The append_bool function shall append a new element to the bson
+ * document
+ * *)
+val append_date_time:
+  t -> string -> int64 -> bool
+
 exception Args_error of string
 
 (** http://http://mongoc.org/libbson/current/bson_append_code.html
@@ -112,7 +119,7 @@ bson_t
 OK  bson_append_bool()
 OK  bson_append_code()
 OK  bson_append_code_with_scope()
-    bson_append_date_time()
+OK  bson_append_date_time()
     bson_append_dbpointer()
     bson_append_decimal128()
     bson_append_document()

@@ -48,6 +48,10 @@ let append_bool document key value =
   let raw = foreign "bson_append_bool" (t @-> string @-> int @-> bool @-> returning bool)
   in raw document key (String.length key) value
 
+let append_date_time document key value =
+  let raw = foreign "bson_append_date_time" (t @-> string @-> int @-> int64_t @-> returning bool)
+  in raw document key (String.length key) value
+
 exception Args_error of string
 
 let append_code document key value =
